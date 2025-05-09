@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/Review-portal</property>
+        <property name="connection.username">USERNAME</property>
+        <property name="connection.password">PASSWORD</property>
+
+        <!-- Hibernate properties -->
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Entities -->
+        <mapping class="com.b2c.reviewportal.model.Businesses"/>
+        <mapping class="com.b2c.reviewportal.model.BusinessOwner"/>
+        <mapping class="com.b2c.reviewportal.model.Review"/>
+        <mapping class="com.b2c.reviewportal.model.User"/>
+
+
+    </session-factory>
+</hibernate-configuration>
