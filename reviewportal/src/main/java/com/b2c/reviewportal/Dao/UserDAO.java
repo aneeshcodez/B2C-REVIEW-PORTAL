@@ -20,10 +20,55 @@ public class UserDAO {
         }
 
     }
+    public static User retrieveUserById(int id){
+        User user;
+        try {
+            Session session = HibernateUtil.getSessionFactory()
+                                           .openSession();
+            Transaction transaction = session.beginTransaction();
+            user = session.get(User.class,id);
+            transaction.commit();
+            session.close();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
+
+    }
+    public static void updateUser(int id,String username,String password){
+        try {
+            Session session = HibernateUtil.getSessionFactory()
+                                           .openSession();
+            Transaction transaction = session.beginTransaction();
+            User user = session.get(User.class,id);
+            if(username!=null){
+                user.setUsername(username);
+            }
+            if (password!=null){
+                user.setPassword(password);
+            }
+            transaction.commit();
+            session.close();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public static void deleteUser(int id){
+        try {
+            Session session = HibernateUtil.getSessionFactory()
+                                           .openSession();
+            Transaction transaction = session.beginTransaction();
+            User user = session.get(User.class,id);
+            session.remove(user);
+            transaction.commit();
+            session.close();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
 
-// If you want test mannualy from test file
-// How to wrap addUser with Try/Catch and handle errors properly with proper error message
-// For this 2nd step ask Gpt ,how it is done usally for persisting something into DB and for all CRUD operations too
 
 

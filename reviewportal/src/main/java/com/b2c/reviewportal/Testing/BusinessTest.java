@@ -8,10 +8,9 @@ import org.hibernate.Transaction;
 
 public class BusinessTest {
     public static void main(String[] args) {
-        User user = new User();
-        user.setPassword("");
-        user.setUsername("");
-        UserDAO.addUser(user);
+        UserDAO.deleteUser(4);
+
+
     }
 }
 
