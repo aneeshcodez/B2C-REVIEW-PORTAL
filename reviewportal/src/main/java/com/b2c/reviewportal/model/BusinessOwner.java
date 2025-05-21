@@ -1,4 +1,5 @@
 package com.b2c.reviewportal.model;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,11 +8,25 @@ public class BusinessOwner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false,unique = false)
     private String ownerName;
 
     @Column(nullable = false)
     private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Business_id")
+    private Businesses businesses;
+
+    //Getters and Setters
+
+    public Businesses getBusinesses() {
+        return businesses;
+    }
+
+    public void setBusinesses(Businesses businesses) {
+        this.businesses = businesses;
+    }
 
 
     public int getId() {

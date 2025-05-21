@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Create a Java class Business under the model package, and annotate it
-with the necessary Hibernate annotations to map it to a businesses table.*/
+ with the necessary Hibernate annotations to map it to a businesses table.*/
 
 @Entity
 public class Businesses {
@@ -17,10 +17,13 @@ public class Businesses {
     private String website;
     @Column(nullable = false)
     private String industry;
+    @OneToOne(mappedBy = "businesses")
+    private BusinessOwner businessOwner;
     @OneToMany(mappedBy = "businesses",cascade = CascadeType.ALL)
-    private List<Review> reviewsOfBusiness = new ArrayList<>();
+    public List<Review> reviewsOfBusiness = new ArrayList<>();
 
 
+    //Getters and Setters
     public Long getId() {
         return id;
     }
@@ -52,6 +55,18 @@ public class Businesses {
     public void setIndustry(String industry) {
         this.industry = industry;
     }
+
+    public BusinessOwner getBusinessOwner() {
+        return businessOwner;
+    }
+
+    public void setBusinessOwner(BusinessOwner businessOwner) {
+        this.businessOwner = businessOwner;
+    }
+    public List<Review> getReviewsOfBusiness() {
+        return reviewsOfBusiness;
+    }
+
     @Override
     public String toString() {
         return "Businesses{" +
@@ -62,4 +77,5 @@ public class Businesses {
                 '}';
     }
 }
+
 
