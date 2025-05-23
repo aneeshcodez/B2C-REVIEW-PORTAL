@@ -16,7 +16,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<Review> reviewsOfUser = new ArrayList<>();
 
-    //Getters and Setters
+
+//Getters and Setters
 
     public int getId() {
         return id;
@@ -44,15 +45,17 @@ public class User {
     public List<Review> getReviewsOfUser() {
         return reviewsOfUser;
     }
+    public void setReviewsOfUser(List<Review> reviewsOfUser) {
+        this.reviewsOfUser = reviewsOfUser;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                // ", reviewsOfUser=" + reviewsOfUser +
+                ", reviewsOfUser=" + reviewsOfUser +
                 '}';
     }
-
-
 }

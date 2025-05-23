@@ -17,7 +17,7 @@
         <property name="format_sql">true</property>
 
         <!-- Entities -->
-        <mapping class="com.b2c.reviewportal.model.Businesses"/>
+        <mapping class="com.b2c.reviewportal.model.Business"/>
         <mapping class="com.b2c.reviewportal.model.BusinessOwner"/>
         <mapping class="com.b2c.reviewportal.model.Review"/>
         <mapping class="com.b2c.reviewportal.model.User"/>

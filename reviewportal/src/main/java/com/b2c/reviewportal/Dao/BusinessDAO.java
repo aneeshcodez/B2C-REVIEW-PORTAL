@@ -2,7 +2,7 @@ package com.b2c.reviewportal.Dao;
 
 import com.b2c.reviewportal.config.HibernateUtil;
 import com.b2c.reviewportal.model.BusinessOwner;
-import com.b2c.reviewportal.model.Businesses;
+import com.b2c.reviewportal.model.Business;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,16 +13,14 @@ import java.util.List;
 
 /** Start by writing a method to save a new Businesses object to the database.*/
 
-public class BusinessesDAO {
-    public static void createBusinesses(Businesses businesses, BusinessOwner businessOwner){
+public class BusinessDAO {
+    public static void createBusiness(Business business, BusinessOwner businessOwner){
         Transaction transaction=null;
         try {
             Session session = HibernateUtil.getSessionFactory()
                                            .openSession();
             transaction = session.beginTransaction();
-//            businesses.setBusinessOwner(businessOwner);
-//            businessOwner.setBusinesses(businesses);
-            session.save(businesses);
+            session.persist(business);
             transaction.commit();
             session.close();
         } catch (Exception e) {
@@ -33,16 +31,16 @@ public class BusinessesDAO {
         }
     }
 
-    public static List<Businesses> fetchAllBusinesses(){
-        List<Businesses> businessesList = new ArrayList<>();
+    public static List<Business> fetchAllBusinesses(){
+        List<Business> businessList = new ArrayList<>();
         Transaction transaction=null;
         try {
             String hib = "FROM Businesses";
             Session session = HibernateUtil.getSessionFactory()
                                            .openSession();
             transaction = session.beginTransaction();
-            Query query = session.createQuery(hib,Businesses.class);
-            businessesList = query.list();
+            Query query = session.createQuery(hib, Business.class);
+            businessList = query.list();
             transaction.commit();
             session.close();
         } catch (Exception e) {
@@ -51,17 +49,17 @@ public class BusinessesDAO {
             }
             e.printStackTrace();
         }
-        return businessesList;
+        return businessList;
     }
 
-    public static Businesses findBusinessById(int id){
+    public static Business findBusinessById(int id){
         Transaction transaction=null;
-        Businesses businessesObj = null;
+        Business businessObj = null;
         try {
             Session session = HibernateUtil.getSessionFactory()
                                            .openSession();
             transaction = session.beginTransaction();
-            businessesObj = session.get(Businesses.class,id);
+            businessObj = session.get(Business.class,id);
             transaction.commit();
             session.close();
         }catch (Exception e) {
@@ -70,7 +68,7 @@ public class BusinessesDAO {
             }
             e.printStackTrace();
         }
-        return businessesObj;
+        return businessObj;
 
     }
 
@@ -79,12 +77,12 @@ public class BusinessesDAO {
             Session session = HibernateUtil.getSessionFactory()
                                            .openSession();
             Transaction transaction = session.beginTransaction();
-            Businesses businesses = session.get(Businesses.class,id);
+            Business business = session.get(Business.class,id);
             if(name!=null){
-                businesses.setName(name);
+                business.setName(name);
             }
             if(website!=null){
-                businesses.setWebsite(website);
+                business.setWebsite(website);
             }
             transaction.commit();
             session.close();
@@ -98,8 +96,8 @@ public class BusinessesDAO {
             Session session = HibernateUtil.getSessionFactory()
                                             .openSession();
             Transaction transaction = session.beginTransaction();
-            Businesses businesses = session.get(Businesses.class,id);
-            session.remove(businesses);
+            Business business = session.get(Business.class,id);
+            session.remove(business);
             transaction.commit();
             session.close();
         } catch (HibernateException e) {

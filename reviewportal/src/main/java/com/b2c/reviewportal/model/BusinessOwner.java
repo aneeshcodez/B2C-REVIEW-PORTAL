@@ -16,16 +16,16 @@ public class BusinessOwner {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Business_id")
-    private Businesses businesses;
+    private Business business;
 
     //Getters and Setters
 
-    public Businesses getBusinesses() {
-        return businesses;
+    public Business getBusinesses() {
+        return business;
     }
 
-    public void setBusinesses(Businesses businesses) {
-        this.businesses = businesses;
+    public void setBusinesses(Business business) {
+        this.business = business;
     }
 
 
@@ -52,12 +52,14 @@ public class BusinessOwner {
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Override
     public String toString() {
         return "BusinessOwner{" +
                 "id=" + id +
                 ", ownerName='" + ownerName + '\'' +
                 ", password='" + password + '\'' +
+                ", business=" + business +
                 '}';
     }
 }

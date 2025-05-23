@@ -7,7 +7,7 @@ import java.util.List;
  with the necessary Hibernate annotations to map it to a businesses table.*/
 
 @Entity
-public class Businesses {
+public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,9 +17,9 @@ public class Businesses {
     private String website;
     @Column(nullable = false)
     private String industry;
-    @OneToOne(mappedBy = "businesses")
+    @OneToOne(mappedBy = "business")
     private BusinessOwner businessOwner;
-    @OneToMany(mappedBy = "businesses",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "business",cascade = CascadeType.ALL)
     public List<Review> reviewsOfBusiness = new ArrayList<>();
 
 
@@ -69,11 +69,13 @@ public class Businesses {
 
     @Override
     public String toString() {
-        return "Businesses{" +
+        return "Business{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", website='" + website + '\'' +
                 ", industry='" + industry + '\'' +
+                ", businessOwner=" + businessOwner +
+                ", reviewsOfBusiness=" + reviewsOfBusiness +
                 '}';
     }
 }

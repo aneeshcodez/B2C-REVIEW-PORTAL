@@ -1,6 +1,7 @@
 package com.b2c.reviewportal.Dao;
 
 import com.b2c.reviewportal.config.HibernateUtil;
+import com.b2c.reviewportal.model.Business;
 import com.b2c.reviewportal.model.BusinessOwner;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

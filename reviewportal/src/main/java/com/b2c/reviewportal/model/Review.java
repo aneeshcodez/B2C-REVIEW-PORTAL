@@ -15,13 +15,14 @@ public class Review {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "business_id")
-    private Businesses businesses;
+    private Business business;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "User_id")
     private User user;
 
 
-    //Getters and setters
+//Getters and setters
 
 
     public int getId() {
@@ -47,12 +48,12 @@ public class Review {
     public void setRating(int rating) {
         this.rating = rating;
     }
-    public Businesses getBusinesses() {
-        return businesses;
+    public Business getBusinesses() {
+        return business;
     }
 
-    public void setBusinesses(Businesses businesses) {
-        this.businesses = businesses;
+    public void setBusinesses(Business business) {
+        this.business = business;
     }
     public User getUser() {
         return user;
@@ -60,5 +61,15 @@ public class Review {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", comment='" + comment + '\'' +
+                ", rating=" + rating +
+                ", business=" + business +
+                ", user=" + user +
+                '}';
     }
 }
