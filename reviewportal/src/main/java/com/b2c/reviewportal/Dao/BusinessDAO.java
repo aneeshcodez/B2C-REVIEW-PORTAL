@@ -11,7 +11,7 @@ import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Start by writing a method to save a new Businesses object to the database.*/
+
 
 public class BusinessDAO {
     public static void createBusiness(Business business, BusinessOwner businessOwner){
