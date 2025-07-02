@@ -1,7 +1,6 @@
 package com.b2c.reviewportal.Dao;
 
 import com.b2c.reviewportal.config.HibernateUtil;
-import com.b2c.reviewportal.model.BusinessOwner;
 import com.b2c.reviewportal.model.Business;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -14,7 +13,7 @@ import java.util.List;
 
 
 public class BusinessDAO {
-    public static void createBusiness(Business business, BusinessOwner businessOwner){
+    public static void createBusiness(Business business){
         Transaction transaction=null;
         try {
             Session session = HibernateUtil.getSessionFactory()
@@ -23,6 +22,8 @@ public class BusinessDAO {
             session.persist(business);
             transaction.commit();
             session.close();
+            // The thing is, In case of an Exception if we rollback the Transaction even before it was started ,it would give
+            // us NullPointer Exception so we verify if the Transaction was started by verifying Transaction's Obj(transaction) is not null
         } catch (Exception e) {
             if (transaction != null){
                 transaction.rollback();
@@ -31,7 +32,7 @@ public class BusinessDAO {
         }
     }
 
-    public static List<Business> fetchAllBusinesses(){
+    public static List<Business> fetchAllBusiness(){
         List<Business> businessList = new ArrayList<>();
         Transaction transaction=null;
         try {
@@ -52,27 +53,38 @@ public class BusinessDAO {
         return businessList;
     }
 
-    public static Business findBusinessById(int id){
-        Transaction transaction=null;
-        Business businessObj = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory()
-                                           .openSession();
-            transaction = session.beginTransaction();
-            businessObj = session.get(Business.class,id);
-            transaction.commit();
-            session.close();
-        }catch (Exception e) {
-            if (transaction != null){
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return businessObj;
+    public static Business findBusinessByName(String name){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "FROM Business WHERE name = :name";
+        Query<Business> query = session.createQuery(hql, Business.class);
+        query.setParameter("name",name);
+
+        Business business = query.uniqueResult();
+        transaction.commit();
+        session.close();
+        return business;
+
+//        Transaction transaction=null;
+//        Business businessObj = null;
+//        try {
+//            Session session = HibernateUtil.getSessionFactory()
+//                                           .openSession();
+//            transaction = session.beginTransaction();
+//            businessObj = session.get(Business.class,id);
+//            transaction.commit();
+//            session.close();
+//        }catch (Exception e) {
+//            if (transaction != null){
+//                transaction.rollback();
+//            }
+//            e.printStackTrace();
+//        }
+//        return businessObj;
 
     }
 
-    public static void updateBusinesses(int id ,String name,String website){
+    public static void updateBusiness(int id , String name, String website){
         try {
             Session session = HibernateUtil.getSessionFactory()
                                            .openSession();
@@ -91,7 +103,7 @@ public class BusinessDAO {
         }
     }
 
-    public static void deleteBusinesses(int id){
+    public static void deleteBusiness(int id){
         try {
             Session session = HibernateUtil.getSessionFactory()
                                             .openSession();

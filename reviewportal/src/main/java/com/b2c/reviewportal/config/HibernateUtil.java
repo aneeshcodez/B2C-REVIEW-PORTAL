@@ -18,7 +18,7 @@ public class HibernateUtil {
             config.configure("hibernate.cfg.xml");
             sessionFactory = config.buildSessionFactory();
         } catch (HibernateException e) {
-            throw new RuntimeException(e);
+              throw new RuntimeException(e);
         }
     }
 

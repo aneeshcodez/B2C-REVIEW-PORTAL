@@ -1,5 +1,7 @@
 package com.b2c.reviewportal.model;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +10,13 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = " Id cannot be null")
     private int id;
     @Column(nullable = false,unique = false)
+    @NotNull(message = " Id cannot be null")
     private String username;
     @Column(nullable = false)
+    @NotNull(message = " Id cannot be null")
     private String password;
     @OneToMany(mappedBy = "user")
     List<Review> reviewsOfUser = new ArrayList<>();

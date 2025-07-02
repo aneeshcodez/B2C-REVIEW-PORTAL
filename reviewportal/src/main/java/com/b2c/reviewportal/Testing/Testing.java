@@ -35,6 +35,7 @@ public class Testing {
         review.setBusinesses(business);
         review.setUser(user);
 
+
         BusinessOwnerDAO.registerOwner(owner);
         ReviewDAO.addReview(review);
 

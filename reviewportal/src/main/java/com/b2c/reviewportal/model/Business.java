@@ -1,24 +1,33 @@
 package com.b2c.reviewportal.model;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/** Create a Java class Business under the model package, and annotate it
- with the necessary Hibernate annotations to map it to a businesses table.*/
 
 @Entity
 public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = " Id cannot be null")
     private Long id;
+
     @Column(nullable = false, unique = true)
+    @NotNull(message = " Name cannot be null")
     private String name;
+
     @Column(nullable = false, unique = true)
+    @NotNull(message = " Website cannot be null")
     private String website;
+
     @Column(nullable = false)
+    @NotNull(message = " industry cannot be null")
     private String industry;
+
     @OneToOne(mappedBy = "business")
     private BusinessOwner businessOwner;
+
     @OneToMany(mappedBy = "business",cascade = CascadeType.ALL)
     public List<Review> reviewsOfBusiness = new ArrayList<>();
 
@@ -79,5 +88,9 @@ public class Business {
                 '}';
     }
 }
+
+//simple
+//assign all the entities of a particular Class
+//Owning side mattum than persist pannan poren cuz if it already has Cascade it will persist the other class Object too
 
 

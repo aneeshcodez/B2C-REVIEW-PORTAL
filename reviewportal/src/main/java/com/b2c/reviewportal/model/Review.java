@@ -1,16 +1,20 @@
 package com.b2c.reviewportal.model;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = " Id cannot be null")
     private int id;
 
     @Column(nullable = false, length = 1000)
+    @NotNull(message = " Comment cannot be null")
     private String comment;
 
     @Column(nullable = false)
+    @NotNull(message = " rating cannot be null")
     private int rating;
 
     @ManyToOne(cascade = CascadeType.ALL)
