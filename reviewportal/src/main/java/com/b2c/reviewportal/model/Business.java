@@ -89,8 +89,5 @@ public class Business {
     }
 }
 
-//simple
-//assign all the entities of a particular Class
-//Owning side mattum than persist pannan poren cuz if it already has Cascade it will persist the other class Object too
 
 
